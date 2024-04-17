@@ -1,40 +1,58 @@
 package ps2.restapi;
 
-public class Professor {
+public class Disciplina {
 	private long id;
 	private String nome;
-	private int matricula;
-	private String area;
+	private String sigla;
+	private String curso;
+ private int semestre;
 		
-	public Professor() {}
-	public Professor(long id, String n, int m, String a) {
+	public Disciplina() {}
+	public Disciplina(long id, String n, String si, String c, int s) {
 		this.id = id;
 		this.nome = n;
-		this.matricula = m;
-		this.area = a;
+		this.sigla = si;
+  this.curso = c;
+  this.semestre = s;
 	}
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
+
+ public String getSigla() {
+  return sigla;
+ }
+
+ public void setSigla(String sigla) {
+  this.sigla = sigla;
+}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getMatricula() {
-		return matricula;
+
+	public String getCurso() {
+		return curso;
 	}
-	public void setMatricula(int matricula) {
-		this.matricula = matricula;
+
+	public void setSemestre(int semestre) {
+		this.semestre = semestre;
 	}
-	public String getArea() {
-		return area;
+
+	public int getSemestre() {
+		return semestre;
 	}
-	public void setArea(String area) {
-		this.area = area;
+
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 }
