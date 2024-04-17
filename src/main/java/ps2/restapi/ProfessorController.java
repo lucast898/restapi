@@ -13,61 +13,59 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class ProfessorController {
+class DisciplinaController {
 
-	private List<Professor> professores;
+	private List<Disciplina> disciplinas;
 
-	public ProfessorController() {
-		this.professores = new ArrayList<>();
-		professores.add(new Professor(1, "Ana", 1111, "Segurança"));
-		professores.add(new Professor(2, "Bob", 2222, "Biologia"));
-		professores.add(new Professor(3, "Charles", 3333, "Economia"));
+	public DisciplinasController() {
+		this.disciplinas = new ArrayList<>();
+		disciplinas.add(new Professor(1, "Desenvolvimento", "Ds", "Sis. de info", 2));
 	}
 
-	@GetMapping("/api/professores")
-	Iterable<Professor> getProfessores() {
-		return this.professores;
+	@GetMapping("/api/disciplinas")
+	Iterable<Disciplina> getDisciplinas() {
+		return this.disciplinas;
 	}
 	
-	@GetMapping("/api/professores/{id}")
-	Optional<Professor> getProfessor(@PathVariable long id) {
-		for (Professor p: professores) {
-			if (p.getId() == id) {
-				return Optional.of(p);
+	@GetMapping("/api/disciplinas/{id}")
+	Optional<Disciplina> getDisciplinas(@PathVariable long id) {
+		for (Disciplina d: disciplinas) {
+			if (d.getId() == id) {
+				return Optional.of(d);
 			}
 		}
 		return Optional.empty();
 	}
 	
-	@PostMapping("/api/professores")
-	Professor createProfessor(@RequestBody Professor p) {
+	@PostMapping("/api/disciplinas")
+	Disciplina createDisciplina(@RequestBody Disciplina d) {
 		long maxId = 1;
-		for (Professor prof: professores) {
-			if (prof.getId() > maxId) {
-				maxId = prof.getId();
+		for (Disciplina disci: disciplinas) {
+			if (disci.getId() > maxId) {
+				maxId = disci.getId();
 			}
 		}
-		p.setId(maxId+1);
-		professores.add(p);
-		return p;
+		d.setId(maxId+1);
+		disciplinas.add(d);
+		return d;
 	}
 	
-	@PutMapping("/api/professores/{professorId}")
-	Optional<Professor> updateProfessor(@RequestBody Professor professorRequest, @PathVariable long professorId) {
-		Optional<Professor> opt = this.getProfessor(professorId);
+	@PutMapping("/api/disciplinas/{disciplinaId}")
+	Optional<Disciplina> updadeDisciplina(@RequestBody Disciplina disciplinaRequest, @PathVariable long disciplinaId) {
+		Optional<Disciplina> opt = this.getDisciplina(disciplinaId);
 		if (opt.isPresent()) {
-			Professor professor = opt.get();
-			professor.setNome(professorRequest.getNome());
-			professor.setMatricula(professorRequest.getMatricula());
-			professor.setArea(professorRequest.getArea());
+			Disciplina disciplina = opt.get();
+			disciplina.setNome(disciplinaRequest.getNome());
+			disciplina.setMatricula(disciplinaRequest.getMatricula());
+			disciplina.setArea(disciplinaRequest.getArea());
 		}
 
 		return opt;				
 	}	
 	
-	@DeleteMapping(value = "/api/professores/{id}")
-	void deleteProfessor(@PathVariable long id) {
-		professores.removeIf(p -> p.getId() == id);
+	@DeleteMapping(value = "/api/disciplinas/{id}")
+	void deleteDisciplina(@PathVariable long id) {
+		disciplinas.removeIf(p -> p.getId() == id);
 	}		
 }
 
